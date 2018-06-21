@@ -1,1 +1,1 @@
-Webscrapping pipeline with Beautiful Soap
+Webscrapping pipeline with Beautiful Soup
