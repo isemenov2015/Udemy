@@ -21,7 +21,7 @@ html, body {
 }
 
 .container button {
-  width: 70px;
+  width: 100px;
   height: 30px;
   background-color: steelblue;
   margin: 3px;
@@ -29,7 +29,6 @@ html, body {
 
 .output {
   font-family: Arial, sans-serif;
-  border: 1px solid black;
-  font-size: 18px;
-  margin: auto;
+  font-size: 14px;
+  margin-left: 200px
 }
