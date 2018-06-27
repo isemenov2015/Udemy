@@ -21,10 +21,13 @@ html, body {
 }
 
 .container button {
-  font-size: 30px;
+  width: 70px;
+  height: 30px;
+  background-color: steelblue;
+  margin: 3px;
 }
 
-.container address_table {
+.output {
   font-family: Arial, sans-serif;
   border: 1px solid black;
   font-size: 18px;
