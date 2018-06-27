@@ -19,3 +19,14 @@ html, body {
   color: #DDCCEE;
   margin-top: 80px;
 }
+
+.container button {
+  font-size: 30px;
+}
+
+.container address_table {
+  font-family: Arial, sans-serif;
+  border: 1px solid black;
+  font-size: 18px;
+  margin: auto;
+}
