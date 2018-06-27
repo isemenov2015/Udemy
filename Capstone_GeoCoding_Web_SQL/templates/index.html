@@ -2,7 +2,7 @@
 <html lang = "en">
   <title>Geocoding app</title>
   <head>
-    <link href="../static/main.css" rel = stylesheet>
+    <link href="{{url_for('static', filename='main.css')}}" rel=stylesheet>
   </head>
   <body>
     <div class="container">
@@ -15,4 +15,11 @@
         <input type='file' name='file'><br>
         <button type="submit">Submit</button>
       </form>
+      <div class="address_table">
+        {% for table in tables %}
+          {{table | safe}}
+        {% endfor %}
+      </div>
+      {% include btn ignore missing %}
+    </div>
   </body>
