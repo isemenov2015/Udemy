@@ -2,7 +2,7 @@
 <html lang = "en">
   <title>Geocoding app</title>
   <head>
-    <link href="{{url_for('static', filename='main.css')}}" rel=stylesheet>
+    <link href="static/main.css" rel=stylesheet>
   </head>
   <body>
     <div class="container">
@@ -12,13 +12,11 @@
         {{text | safe}}
       </div>
       <form action="{{url_for('success')}}" method="POST" enctype="multipart/form-data">
-        <input type='file' name='file'><br>
+        <input type='file' accept=".csv" name='file'><br>
         <button type="submit">Submit</button>
       </form>
-      <div class="address_table">
-        {% for table in tables %}
-          {{table | safe}}
-        {% endfor %}
+      <div class="output">
+        {{table | safe}}
       </div>
       {% include btn ignore missing %}
     </div>
