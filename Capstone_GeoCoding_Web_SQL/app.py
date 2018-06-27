@@ -4,6 +4,7 @@ from sqlalchemy.sql import func
 from werkzeug import secure_filename
 import pandas as pd
 from geopy.geocoders import Nominatim
+from datetime import datetime
 
 app = Flask(__name__)
 
@@ -13,17 +14,13 @@ def index():
 
 @app.route("/success", methods=['POST'])
 def success():
-    global fname
+    global filename
     if request.method == 'POST':
         file = request.files['file']
-        #print('File variable:', file)
         if file.filename == None or file.filename == '':
             return render_template('index.html')
-        fname = "uploaded_" + file.filename
-        file.save(secure_filename(fname))
-        data = pd.read_csv(fname)
+        data = pd.read_csv(file)
         colnames_list = [x.lower() for x in data.columns.values]
-        #print(colnames_list)
         if 'address' in colnames_list:
             addr_colindex = colnames_list.index('address')
             geolocator = Nominatim()
@@ -40,15 +37,16 @@ def success():
             data['Latitude'] = lat_list
             data['Longitude'] = lon_list
             text = "Showing top 3 rows of data with calculated coordinates"
-            tables = [data.head(3).to_html(classes = "address_table")]
+            filename = datetime.now().strftime("uploads/%Y-%m-%d-%H-%M-%S-%f" + ".csv")
+            data.to_csv(filename, index = None)
         else:
             text = "No 'address' column found in a file"
             tables = []
-    return render_template("index.html", tables = tables, btn = "download.html", text = text)
+    return render_template("index.html", table = data.head(3).to_html(), btn = "download.html", text = text)
 
 @app.route("/download")
 def download():
-    return send_file(fname, attachment_filename = "get_"+fname, as_attachment = True)
+    return send_file(filename, attachment_filename = 'geocoded.csv', as_attachment = True)
 
 if __name__ == '__main__':
     app.debug = True
